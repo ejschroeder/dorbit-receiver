@@ -1,12 +1,16 @@
 import time
 import sys
+import os
 from datetime import datetime
 from datetime import timedelta
 import RPi.GPIO as GPIO
 import asyncio
 import aiohttp
+import notifier
 
 RECEIVE_PIN = 13
+NOTIFY_HOST = 'http://localhost:9001'
+SERVER_TOKEN = os.environ['SERVER_TOKEN']
 
 doorbell_code = '011010110000100000'
 
@@ -78,6 +82,7 @@ def receive_codes():
         if timings['code_delay'](low_delta.microseconds / 1000000.0):
             if validate_code(code_word):
                 print(code_word + " Ring-a-ding ding!")
+                notifier.notify(NOTIFY_HOST + '/ring', { 'source_id': 0, 'token': SERVER_TOKEN })
                 time.sleep(2)
             code_word = ''
             high_delta = timedelta(0)
