@@ -84,7 +84,7 @@ def receive_codes():
             if validate_code(code_word):
                 print(code_word + " Ring-a-ding ding!")
                 notifier.notify(NOTIFY_HOST + '/ring', { 'source_id': 0, 'token': SERVER_TOKEN })
-                time.sleep(2)
+                time.sleep(4)
             code_word = ''
             high_delta = timedelta(0)
             low_delta = timedelta(0)
