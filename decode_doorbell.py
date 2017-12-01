@@ -9,8 +9,9 @@ import aiohttp
 import notifier
 
 RECEIVE_PIN = 13
-NOTIFY_HOST = 'http://localhost:9001'
+NOTIFY_HOST = os.environ['SLACKBOT_SERVER']
 SERVER_TOKEN = os.environ['SERVER_TOKEN']
+SOURCE_ID = os.environ['DORBIT_SOURCE_ID']
 
 doorbell_code = '011010110000100000'
 
